@@ -1,0 +1,338 @@
+\clearemptydoublepage
+\chapter{Trabajo Realizado}
+\chaptermark{Trabajo Realizado}
+
+En este capítulo intentaré explicar y mostrar los aspectos generales de las funciones que llegué a desarrollar durante mis prácticas.
+Proporcionaré diagramas de datos y algunas imágenes que ayuden a entender la idea que hay detrás de muchas soluciones a los problemas a los que nos enfrentamos como equipo.
+
+La información real del proyecto permanecerá oculta por cuestiones de confidencialidad, pero no afectará a la comprensión del trabajo.
+
+\section{Planeación de Desarrollo}
+
+\begin{figure}[ht]
+    \begin{center}
+       \includegraphics[width=1\linewidth]{chapter2/figures/gantt.png}
+    \end{center}
+    \caption[Planeacion de Desarrollo en Diagrama de Gantt]
+    {\footnotesize Planeacion de Desarrollo en Diagrama de Gantt}
+    \label{fig:mufigure3}
+ \end{figure}
+
+\section{Visualizador de Ontologías}
+
+Esta aplicación tiene objetivos muy concretos. En primer lugar, integrarse al sistema y formato creado por Gaia-X, por lo tanto, debemos incorporar un método para leer los archivos provenientes de este proyecto.
+Segundo, nos enfocaremos en tareas de visualización de ontologías y no tanto de creación o \textit{debugging}. Este último punto nos determina el tipo de herramientas a priorizar, como pueden ser métodos de filtrado de clases,
+búsqueda, comparación de propiedades, manipulación de la apariencia de las ontologías, etc. Más adelante, una vez tengamos este punto cubierto, veremos qué podemos desarrollar para la edición de una ontología. Mientras tanto, debemos
+asegurarnos de poder incorporar nuestra aplicación al conjunto de software disponible y asi utilizarla en conjunto con las opciones dedicadas a otras tareas.
+
+La escena desarrollada se ve como en la Figura 2.2. Aquí podemos observar, desde el punto de vista del usuario, como se enfrentaría a un grupo de clases provenientes de 4 ontologías diferentes.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.7\linewidth]{chapter2/figures/ontology_project.png}
+   \end{center}
+   \caption[Escena desarrollada]
+   {\footnotesize Escena desarrollada}
+   \label{fig:mufigure9}
+\end{figure}
+
+Cada clase está representada por una instanciación de la clase \textit{Bubble} y se conecta a otras clases a través de dos tipos de conexiones diferentes:
+\begin{itemize}
+   \item Herencia: en el que se especifica que una clase es subclase de otra de mayor jerarquía. (conexión naranja)
+   \item Relación específica: una conexión que incluye una etiqueta de texto para especificar de qué manera se conectan dichas clases. (conexión azul) 
+\end{itemize}
+
+\section{Software de Desarrollo}
+
+El proyecto se desarrolló con Unity (versión 2021.3.23f1). Se trata de una plataforma de desarrollo de juegos potente y versátil que ha revolucionado la forma de crear juegos, desde proyectos independientes hasta grandes éxitos de taquilla. Con Unity, los desarrolladores pueden diseñar, crear e implantar juegos de alta calidad en multitud de plataformas, como dispositivos móviles, consolas y PC. Su interfaz fácil de usar y su amplia biblioteca de recursos lo hacen accesible tanto para los profesionales experimentados como para los recién llegados al desarrollo de juegos.
+
+Uno de los aspectos más atractivos de Unity es su capacidad para facilitar la creación rápida de prototipos y la iteración. Los desarrolladores pueden dar vida rápidamente a sus ideas, probar mecánicas de juego y perfeccionar sus creaciones en tiempo real. Esta agilidad no sólo acelera el proceso de desarrollo, sino que también permite una mayor creatividad y experimentación.
+
+Además, Unity ofrece un vasto ecosistema de activos, plugins y apoyo de la comunidad, lo que permite a los desarrolladores ampliar la funcionalidad de la plataforma y colaborar con otros creadores. Desde activos y scripts prefabricados hasta técnicas avanzadas de renderizado y algoritmos de inteligencia artificial, Unity proporciona una gran cantidad de recursos para agilizar el desarrollo y mejorar la calidad de los juegos.
+
+\subsection{OpenXR}
+
+Para conectar Unity con el casco de realidad virtual, optamos por OpenXR, un estándar abierto que pretende agilizar el desarrollo de aplicaciones de realidad virtual proporcionando una API común para interactuar con el hardware de realidad virtual. Desarrollado por Khronos Group, un consorcio industrial centrado en el desarrollo de estándares abiertos para gráficos y computación paralela, OpenXR pretende abordar la fragmentación del ecosistema de realidad virtual y realidad aumentada permitiendo a los desarrolladores crear aplicaciones compatibles con una amplia gama de dispositivos, plataformas y entornos de ejecución. \cite[]{OpenXR}
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.4\linewidth]{chapter2/figures/OpenXR_logo.png}
+   \end{center}
+   \caption[OpenXR logo]
+   {\footnotesize OpenXR logo}
+   \label{fig:mufigure8}
+\end{figure}
+
+Proporciona un conjunto de API estándar para funciones como el renderizado, el manejo de entradas, el seguimiento y la interacción, lo que permite a los desarrolladores acceder y controlar las capacidades de los dispositivos de hardware de realidad virtual y realidad aumentada de forma coherente e independiente de la plataforma.
+Esto fue de enorme relevancia, debido a que en nuestro departamento disponíamos de diferentes headsets para desarrollo y presentaciones, como el HTC Vive Pro, HTC Focus y Meta Quest 2, por lo que la estandarización fue crucial para la mejora consistente en nuestro proyecto.
+
+\subsection{XR Interaction Toolkit}
+
+Otro elemento central de este proyecto fue el uso del \textit{XR Interaction Toolkit} de Unity, que permite todo tipo de interacciones entre el jugador y el entorno.
+
+El paquete XR Interaction Toolkit es un sistema de interacción de alto nivel basado en componentes para crear experiencias de realidad virtual y realidad aumentada. Proporciona un marco que hace que las interacciones 3D y de interfaz de usuario estén disponibles a partir de eventos de entrada de Unity. El núcleo de este sistema es un conjunto de componentes base \textit{Interactor} e \textit{Interactable}, y un \textit{Interaction Manager} que une estos dos tipos de componentes. \cite[]{XRInteraction}
+
+Si observamos el conjunto de Figuras 2.4, vemos algunos ejemplos de interacciones que podemos utilizar gracias a esta kit de herramientas. Con el puntero raycast, manteniendo el click presionado mientras apuntamos a una burbuja, podemos desplazarla en el espacio como queramos. Ese mismo puntero nos permite teletransportarnos a una burbuja deseada si movemos el joystic hacia adelante al apuntarle. También podemos interactuar con elementos de UI como botones e imágenes. 
+
+\begin{figure}[ht]
+   \centering
+   \begin{subfigure}{0.45\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{chapter2/figures/raycast.png}
+       \caption{Puntero Raycast}
+   \end{subfigure}
+   \hfill
+   \begin{subfigure}{0.45\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{chapter2/figures/teleport.png}
+       \caption{Teletransportación}
+   \end{subfigure}
+   \\
+   \begin{subfigure}{0.45\textwidth}
+       \centering
+       \includegraphics[width=\textwidth]{chapter2/figures/highlight.png}
+       \caption{Interacciones con UI}
+   \end{subfigure}
+   \caption{Interaccioes del Toolkit}
+   \label{fig:subfigures}
+\end{figure}
+
+\section{Funciones Desarrolladas}
+
+\subsection{Sistema de Búsqueda}
+
+Implementar un sistema de búsqueda es casi obligatorio a la hora de crear un software de datos e información. Siempre necesitamos comprobar la existencia de clases y en la mayoría de los casos los resultados de búsqueda tienen también una funcionalidad asociada. En nuestro caso optamos por 2 diferentes, que pueden ser habilitadas desde el inspector de Unity: resaltar la burbuja elegida o teletransportarse a ella si se desea. Esto demostró ser extremadamente útil y escala muy bien si la cantidad de clases aumenta.
+Para cualquiera de estas funcionalidades, necesitábamos asociar cada resultado de búsqueda a la burbuja correcta, para que podamos encontrar la referencia a los métodos de la burbuja. Resaltar es sólo cambiar el color del material mientras que la teletransportación reposiciona al jugador y lo orienta hacia la burbuja en cuestión.
+
+El proceso de búsqueda es manejado por el \textit{Search Manager} y su componente principal \textit{SearchScript.cs}. Está conectado al campo de entrada de búsqueda y llama al método Search() cada vez que hay un cambio en el texto de entrada. Dicho script contiene una lista \textit{List<GameObject>Elements} que contiene todas las clases de la escena. Esta es llenada al crear las burbujas para las clases extraidas de un archivo, pero eso lo veremos en otra sección.
+
+Cuando hay una coincidencia entre el texto de entrada y el nombre de cualquier burbuja, creamos botones dentro de un panel y los referenciamos a su burbuja correspondiente, de modo que podemos llamar a un método específico al pulsar sobre él.
+
+Los métodos son los siguientes:
+\begin{itemize}
+   \item Search: este es el método de callback cada vez que se modifica el campo de entrada de texto. Se encarga de comparar el texto ingresado con los nombres de las clases de la escena y crear una lista de resultados compuesta por referencias a las burbujas correspondientes.
+   \item DeleteButtons: cada vez que ingresamos una letra, los resultados cambian. Por esta razón, debemos borrar los botones de los resultados de la búsqueda anterior.
+   \item CreateButtons: instancia un botón por cada burbuja que haya dentro de la lista de resultados y realiza las conexiones necesarias para las funciones de callback de cada botón, ya se teletransportar o resaltar. También resalta el texto dle botón que coincida con la búsqueda.
+   \item ResetSearch: vacía el campo de entrada para cuando se complete una función de callback y así se resetea el sistema.
+   \item UpdateResultsButton: es un sistema de \textit{flag} para determinar el mensaje de estado de búsqueda. Este es transmitido al usuario a través de un cuadro de texto.
+\end{itemize}
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.7\linewidth]{chapter2/figures/searchtool.png}
+   \end{center}
+   \caption[Búsqueda de clases y resultados]
+   {\footnotesize Búsqueda de clases y resultados}
+   \label{fig:mufigure10}
+\end{figure}
+
+Esta herramienta se incorpora al menú de la mano, que se acopla al mando de la mano izquierda en la simulación, e interactuamos con él con el raycast del mando de la mano derecha. Esta es una forma muy intuitiva y frecuente de añadir un menú en las simulaciones de RV.
+
+Añadimos un teclado que obtuvimos de un proyecto de código abierto en Github y funcionó perfectamente desde el principio. \cite[]{Keyboard}
+
+La figura 2.6 ilustra un poco el funcionamiento del proceso de búsqueda. Incluye el Reconocimiento de Voz explicado en la sección siguiente.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=1\linewidth]{chapter2/figures/searchsystem.png}
+   \end{center}
+   \caption[Diagrama de Paquetes del Sistema de Búsqueda]
+   {\footnotesize Diagrama de Paquetes del Sistema de Búsqueda}
+   \label{fig:mufigure10}
+\end{figure}
+
+\subsection{Sistema de Reconocimiento de Voz}
+
+Para complementar el Sistema de Búsqueda, pensamos que sería buena idea implementar un Sistema de Reconocimiento de Voz con IA para reducir los tiempos de tecleo. La principal limitación era que para conseguirlo necesitábamos una herramienta offline, de forma que el proyecto no dependiera de la conexión a internet y los datos se mantuvieran seguros y confidenciales.
+Esto era bastante difícil dado que los mejores sistemas gratuitos de reconocimiento de voz requieren conexión o si no, son servicios de pago.
+
+Después de investigar un poco encontré algunas alternativas, pero necesitaba probarlas y ver cuál funcionaba mejor.
+\begin{itemize}
+   \item \textbf{Servicios fuera de línea:}
+   \begin{itemize}
+      \item \textbf{DeepSpeech:}
+      Motor Speech-To-Text de código abierto, que utiliza un modelo entrenado mediante técnicas de aprendizaje automático basado en el trabajo de investigación Deep Speech de Baidu. El proyecto no ha recibido actualizaciones desde 2020 y no hay soporte para las últimas versiones de python, por lo que para usarlo es necesario utilizar una herramienta como win-pyenv para gestionar versiones antiguas. Siguiendo el único tutorial online, conseguí instalarlo pero el reconocimiento no fue bueno, alrededor de un 20\% y un 30\% de efectividad.
+      \item \textbf{Vosk:}
+      También es un kit de herramientas offline pero con soporte en diferentes idiomas. En su página web principal ofrecen un ejemplo de Unity, pero los resultados no fueron buenos y no se reconoció ninguna palabra.
+      \item \textbf{Unity Keyword Recognizer:}
+      Haciendo uso del servicio de reconocimiento de voz de Windows, podemos reconocer palabras y compararlas con comandos de la lista para activar eventos específicos. Inconveniente: hay que añadir manualmente cada comando a la lista y la llamada de retorno correspondiente.
+      \item \textbf{WhisperAI:}
+      Normalmente WhisperAI requiere una API y pagas cada vez que lo usas, pero también puedes instalarlo localmente usando la librería pip para python.
+      \item \textbf{Undertone:}
+      Un activo de pago en Unity Store que también funciona sin conexión con WhisperAI.   \end{itemize}
+   \item \textbf{Servicios en línea:}
+   \begin{itemize}
+      \item \textbf{Unity Dictation Recognizer:}
+      Funciona igual que el Reconocedor de Palabras Clave pero para identificar frases aleatorias necesitamos conexión a internet. Funciona bastante bien y reconoce los idiomas añadidos en la configuración de Windows del PC.
+      \item \textbf{Hugging Face:}
+      Es una IA online gratuita que proporciona una API con Unity y se encarga del reconocimiento de voz.
+      \item \textbf{Recognissimo:}
+      Es un activo de pago de Unity que también se encarga del reconocimiento de voz. Técnicamente está basado en el sistema Vosk.
+   \end{itemize}
+\end{itemize}
+
+Habiéndolo consultado con mi equipo y mi supervisor, decidimos que implementaríamos la versión offline de WhisperAI y también probaríamos el Reconocedor de Dictados de Unity, dado que depende de Unity y Windows y usar la conexión a internet para eso era aceptable.
+El sistema de búsqueda funciona de la misma manera, sólo estamos cambiando el método de entrada.
+
+DictationRecognizer escucha la entrada de voz y trata de determinar qué frase fue pronunciada. \cite[]{DicationRecognizer}
+
+Los usuarios pueden registrarse y escuchar los eventos de hipótesis y frase completada. Los métodos Start() y Stop() activan y desactivan respectivamente el reconocimiento del dictado. Una vez que se ha terminado con el reconocedor, debe ser desechado utilizando el método Dispose() para liberar los recursos que utiliza. Liberará estos recursos automáticamente durante la recolección de basura con un coste adicional de rendimiento si no se liberan antes.
+
+La versión offline de WhisperAI fue muy interesante de usar ya que sólo puede leer archivos de audio y no voz en tiempo real. \cite[]{WhisperAI}
+
+Esto añadía un nuevo paso en el proceso de reconocimiento ya que primero teníamos que grabar la voz y luego interpretarla con la librería instalada.
+Desarrollé un script en Python que era llamado desde Unity cuando queríamos buscar algo por voz, y primero registraría la voz en un archivo, luego reconocería el texto en él y lo enviaría de vuelta a Unity abriendo un proceso e imprimiendo en él.
+Unity estaría escuchando cualquier dato de entrada del proceso abierto después de llamar al script de python. Lo que era realmente interesante era que podíamos seleccionar el tamaño del modelo de entrenamiento, por lo que podíamos optimizar los recursos u optar por un mejor reconocimiento si lo deseábamos. Ver Figura 2.7.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.85\linewidth]{chapter2/figures/whisperai.png}
+   \end{center}
+   \caption[Modelos de entrenamiento de Whisper AI]
+   {\footnotesize Modelos de entrenamiento de Whisper AI}
+   \label{fig:mufigure11}
+\end{figure}
+
+\subsection{Menú Jerárquico}
+
+Esta característica fue desarrollada al principio de mi pasantía y en ese momento las ontologías eran diferentes a las que estamos usando ahora, por lo que esta desactualizada y requiere ser reestructurada para ser agregada al formato actual del proyecto.
+
+La idea era tener una pestaña en el menú de mano donde pudiéramos ver rápidamente qué clases había en la escena según su nivel en la ontología. La inspiración para esto fue la interfaz del sistema de carpetas del Explorador de Windows. Vemos una carpeta y, al hacer clic en ella, expandimos el contenido que hay dentro y vemos las subcarpetas.
+Así podemos navegar por nuestro sistema de datos y explorar todo lo que hay dentro. Esto era muy similar a nuestra antigua estructura ontológica, ya que teníamos un objeto Raíz y a partir de él empezábamos a conectar clases, de forma que cada una de ellas estaba conectada de alguna manera a ese objeto raíz.
+Esto significaba que podíamos hacer clic y expandir una clase, para ver qué clases derivaban de ella, según su nivel en la ontología. En la Figura 2.8, podemos ver una ilustración de como sería este funcionamiento.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.6\linewidth]{chapter2/figures/hierarchy.png}
+   \end{center}
+   \caption[Ilustración gráfica de funcionamiento]
+   {\footnotesize Ilustración gráfica de funcionamiento}
+   \label{fig:mufigure11}
+\end{figure}
+
+La herramienta estaba implementada y funcionaba correctamente, y cada botón del menú también hacía referencia a las burbujas correspondientes, por lo que también teníamos funcionalidades de resaltado/teleportado asociadas a ellas. Todo esto cambió cuando empezamos a importar ontologías desde ficheros jsonld y el concepto de objeto raíz dejó de ser
+
+\subsection{Importación desde archivos Jsonld}
+
+Como he mencionado antes, esta simulación depende del Ontology Manager para cargar y guardar ontologías en archivos json, pero queremos ser capaces de leer información de Gaia-X y mostrarla en la escena para operar con ella. Después, deberíamos poder guardarla en un archivo similar y visualizarla en cualquier herramienta 2D y ver las modificaciones que hemos hecho.
+Para esto necesitamos un Parser jsonld, para interpretar la información de Gaia-X y crear un archivo json que sea legible desde nuestro proyecto. Para ello hemos utilizado el paquete Newtonsoft Json Unity que nos ha facilitado mucho la tarea. \cite[]{json} 
+
+El proceso de conversión es el resultado de un cuidadoso estudio por lo que necesita una explicación clara.
+Primero descargamos el archivo JsonLD de la página web de la ontología Gaia-X en el estándar que han creado. Esta información luego pasa por dos procesos dentro de la escena Unity. El primero es un Parser para traducir el contenido y los datos a un formato estructurado con los valores que necesitamos para crear el objeto 3D en la escena. Esto incluye:
+
+\begin{itemize}
+   \item ID numérico único del juego
+   \item Tipo de burbuja ( \textbf{Class} / Propiedad / Instancia )
+   \item Nombre de la burbuja
+   \item Posición 3D ( importada de otro archivo )
+   \item Burbujas Poseídas
+   \item Burbujas poseídas
+   \item Heredado de Burbujas
+   \item Heredado de Burbujas
+\end{itemize}
+
+Esta es toda la información que utilizamos para crear una Burbuja en la escena, por lo que es importante que no olvidemos ninguna de ellas en el proceso de parseo.
+Este primer proceso se lleva a cabo en el momento de Inicio de la simulación pero esto puede ser cambiado a otro momento, como un menú de botones para importar ontologías específicas. De esta forma creamos un nuevo fichero que puede ser elegido para importar desde el Menú de Mano en la escena.
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.85\linewidth]{chapter2/figures/importexport.png}
+   \end{center}
+   \caption[Import/Export process]
+   {\footnotesize Import/Export process diagram}
+   \label{fig:mufigure12}
+\end{figure}
+
+La forma en que filtramos la información es con una lista de condiciones if que comprueban la existencia de diferentes claves o propiedades json que nos guían y nos dicen qué información coger y cuál dejar, ya que el fichero jsonld contiene mucha información que no vamos a utilizar en nuestra escena, pero que necesitamos conservar para cuando exportemos la escena no perder ningún dato en el proceso.
+
+A partir de los archivos jsonld que hemos descargado, buscamos en primer lugar objetos de dos tipos diferentes: Clases ("owl\#Class") y Conexiones ("owl\#ObjectProperty"). Analizaremos la información y almacenaremos las dos versiones de cada tipo en cuatro listas diferentes más una lista extra para almacenar toda la información no analizada que necesitaremos para el proceso de exportación. Con esa información, completaremos las listas de nuestro archivojson con las burbujas de propiedad y las subclases.
+
+Para explicar cómo funciona la herramienta de importación, será más fácil si utilizamos un ejemplo de la lista de clases convertidas. También podemos ver el código 2.2 del apéndice.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.9\linewidth]{chapter2/figures/parser.png}
+   \end{center}
+   \caption[Conversión de clase y conexión a formato interno]
+   {\footnotesize Conversión de clase y conexión a formato interno}
+   \label{fig:mufigure13}
+\end{figure}
+
+Cuando encontramos una clase, tenemos que deshacernos de la url en el id y quedarnos con el nombre real de la clase y la ontología a la que pertenece y asignarle un ID de objeto de juego único.
+Para ello, nos fijamos en el id y el texto después de la última "/". El \# separará la etiqueta de la ontología a la izquierda del nombre de la clase a la derecha.
+Repetimos esta operación de pasar por cada objeto json de la lista hasta que hayamos guardado todos los objetos de tipo clase.
+
+Después de analizar todas las clases, podemos empezar a buscar conexiones, que se especifican como tipo "Propiedad de objeto" o con la clave "subClassOf" dentro del objeto de clase. Cada propiedad de objeto contiene información sobre el id de la conexión, el dominio (origen), el rango (destino) y una etiqueta. Nuestra tarea consiste en buscar el id específico en la lista de objetos y luego buscar y añadir los ids en ambos extremos de la conexión en nuestro formato.
+
+Así, por ejemplo, la conexión mostrada en la Figura 2.9 tiene el id de la conexión con dominio y rango. En este caso concreto, lo leeríamos así : "La clase Service Offering de la ontología de servicios produce la clase ApiDescription de la ontología de servicios". 
+La url subClassOf de la misma figura nos indicará de qué clase estamos heredando en este momento. En este caso, ApiDescription hereda de Consumable. Lo que hacemos ahora es añadir estas conexiones en las listas correspondientes con nuestro propio formato. La conexión de propiedad objeto se añade en la lista "ownedByBubblesList" con el id del origen de la conexión ( range ) y la etiqueta que hemos parseado a partir del id de la conexión. En el otro extremo de la conexión, añadiremos el id 1007 en el "hasBubblesIDsList". La conexión subClass
+funciona de forma similar. Nuestra ApiDescription hereda de la burbuja 1000, que se añade a la "inheritedBubblesList".
+
+Por ahora, aunque no tenemos un algritmo de posicionamiento para colocar las burbujas en la escena, necesitamos algún tipo de valor de posición inicial. Para resolver esto parcialmente, podemos generar un archivo de posición 2D para cada ontoloy con una herramienta en línea llamada WebVowl, y leer los valores de la misma. Estos están conectados a la burbuja correspondiente a través de una dirección IRI, por lo que tenemos que buscar la clase con la misma dirección. Escalaremos los valores y añadiremos la tercera dimensión de la escena para que cada clase se sitúe en algún lugar de la escena y no se solapen todas las burbujas. Ver Figura 2.11.
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.7\linewidth]{chapter2/figures/position.png}
+   \end{center}
+   \caption[Objeto Json del archivo de posiciones]
+   {\footnotesize Objeto Json del archivo de posiciones}
+   \label{fig:mufigure13}
+\end{figure}
+
+\subsection{Exportación a archivos Jsonld}
+
+El proceso de Exportación es muy similar, ya que leerá toda la información actual de cada burbuja en la escena y la guardará en un archivo json. Nuestro Parser tomará cada elemento y creará la clase Gaia-X correspondiente en un archivo jsonld. La lógica sigue siendo la misma, crear todas las clases y una vez que hayamos terminado, crear todas las conexiones.
+
+Esta herramienta de Importación/Exportación es crucial para el proyecto. Sin ella, no tendríamos la interoperabilidad necesaria. Pero para ello, debemos estar seguros de que no estamos perdiendo información en ningún paso o dirección del proceso. Esto significa que tenemos que comprobar todas las listas con frecuencia y buscar anomalías y datos irregulares.
+
+Una vez que terminemos las principales tareas de visualización, podremos enfocarnos en tareas de edición y creación por lo que las ontologías sufrirán modificaciones dentro de nuestra aplicación y si esta herramienta funciona correctamente, deberíamos ver los resultados en los archivos exportados.
+
+\subsection{Contenedores de Ontologías}
+
+La idea de esta característica es tener un contenedor para cada ontología de manera que podamos diferenciarlas fácilmente. Cada uno de ellos también debe ser interactivo para que pueda agarrarlos y moverlos en la escena, y al hacerlo, todas las clases contenidas se moverán de la misma manera. Esto creará una nueva capa de interacción en nuestra simulación, permitiéndonos interactuar tanto con burbujas como con ontologías completas. A partir de aquí, podemos añadir nuevas características que también se aplican a todas las clases de una ontología.
+
+Este diagrama de clases nos muestra cómo están conectados los scripts en el código. OntologyManager se encarga de instanciar los prefabs y rellenar las listas correspondientes de cada uno de los subgestores.
+
+Cada vez que creamos una nueva burbuja debemos comprobar si la ontología a la que pertenece ya existe y crearla en caso contrario. Cada nueva clase está contenida en un objeto con el nombre de la ontología y este a su vez está vinculado a de mayor jerarquía. Este último tiene 2 componentes de script: Ontologies.cs y ContainersManager.cs. Cada vez que tenemos que instanciar una nueva ontología, tenemos que añadirla a la lista de ontologías en Ontologies.cs y luego instanciar el contenedor y añadirlo a la lista ontologyContainers en el ContainersManager.cs
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=1\linewidth]{chapter2/figures/containers.png}
+   \end{center}
+   \caption[Diagrama de clases para los contenedores]
+   {\footnotesize Diagrama de clases para los contenedores}
+   \label{fig:mufigure16}
+\end{figure}
+
+ContainersManager.cs tiene el control de la característica, por lo que es el componente que necesitamos para los métodos de callback.
+
+OntologyContainer.cs tiene el control del propio contenedor, de forma que cada vez que decidamos generarlos, recalculará el tamaño de todas las burbujas. Los métodos son bastante sencillos de entender, pero el proceso es el siguiente: primero echamos un vistazo a todas las clases dentro de una ontología y encontramos los extremos de la misma (min y max de los 3 ejes). Con eso podemos saber el tamaño del propio contenedor y escalar el prefabricado para que se ajuste a la ontología. Ver código 2.3 del apéndice.
+
+Cada contenedor también tiene un script VRInteractable para que podamos moverlo con el raycast de nuestro controlador. Lo bueno de esto es que cada clase contenida en él también se moverá en el mismo vector de desplazamiento y magnitud, por lo que todo se comportará como un bloque. Con esto conseguimos la capa de interacción mencionada anteriormente.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.8\linewidth]{chapter2/figures/ontologies&containers.png}
+   \end{center}
+   \caption[Ontologías y sus contenedores]
+   {\footnotesize Ontologías y sus contenedores}
+   \label{fig:mufigure17}
+\end{figure}
+
+\subsection{Modos de distribución de ontologías}
+
+Esta característica pretende complementar el proceso de importación, ya que estamos asignando un valor de tercera dimensión al vector de posición para instanciar la burbuja, pero todas tienen el mismo, por lo que estamos perdiendo el efecto 3D del que estábamos tan orgullosos. Para superarlo, hablamos de utilizar formas geométricas básicas para describir cada ontología.
+Calcularíamos la dimensión de la forma deseada y luego proyectaríamos cada clase según sus valores x e y. Ver código 2.4 del apéndice.
+
+\begin{figure}[ht]
+   \begin{center}
+      \includegraphics[width=0.8\linewidth]{chapter2/figures/clusters shape.png}
+   \end{center}
+   \caption[Cálculo de proyección para los modos de distribución]
+   {\footnotesize Cálculo de proyección para los modos de distribución}
+   \label{fig:mufigure17}
+\end{figure}
+
+En el caso de la Figura 2.14, tomamos la ontología y sus clases, calculamos la distancia x entre las burbujas más extremas, la utilizamos para crear un radio de cilindro y, a continuación, colocamos cada burbuja en el valor z de este cilindro según las otras dos coordenadas a modo de proyección.
+
+Esta misma lógica se puede aplicar con cualquier forma deseada. También implementé una esférica pero no alcancé a hacerla funcionar correctamente antes del final de la pasantía. Si además añadiéramos rotaciones a las interacciones de los contenedores, podríamos buscar una forma ontológica concreta para colocarlos todos de la forma deseada y crear un layout mucho más agradable al usuario.
+
+También podemos mencionar que, aunque estas distribuciones son puramente geométricas, también podríamos intentar dar con un parámetro que queramos optimizar y buscar un modelo de IA adecuado para ello. Por ejemplo, podría ser muy útil reducir la longitud total de las conexiones en la escena, de modo que no tengamos tantas líneas en la escena interfiriendo con los efectos visuales.
