@@ -316,7 +316,7 @@ public class Parser : MonoBehaviour
 
                 string connectionID = propertyObject["@id"].Value<string>();
                 string[] parts = connectionID.Split("#");
-                string labelName = parts[parts.Length - 1]; // many object properties have labels for connections but not all of them, it can be better to just use the id text
+                string labelName = parts[parts.Length - 1];
 
                 VerifyListsForRepetitionAndAdd(domainIndex, rangeIndex, labelName);
                 

@@ -45,7 +45,7 @@ public class Bubble : NetworkBehaviour, IEquatable<Bubble>
 
     [Space(10)]
     [Header("Bubble Relations")]
-    [Tooltip("The bubble from which this bubble is inherited.")]
+    [Tooltip("The bubble from which this bubble inherits.")]
     public List<Bubble> inheritedBubblesList = new();
 
     [Tooltip("List of bubbles directly connected to this bubble.")]
@@ -55,7 +55,7 @@ public class Bubble : NetworkBehaviour, IEquatable<Bubble>
     [Tooltip("List of bubbles that inherit from this bubble.")]
     public List<Bubble> inheritingBubblesList = new();
 
-    [Tooltip("List of bubbles that this bubble has.")]
+    [Tooltip("List of bubbles that this bubble connects to")]
     public List<Bubble> hasBubblesList = new();
     
     public NetworkList<ulong> hasBubblesIDList; 
@@ -66,7 +66,7 @@ public class Bubble : NetworkBehaviour, IEquatable<Bubble>
     [Tooltip("List of comments/properties of each bubble.")]
     public List<string> propertyValues = new();
 
-    [Tooltip("List of bubbles owning this bubble.")]
+    [Tooltip("List of bubbles that connect to this bubble.")]
     public List<Bubble> ownedByBubblesList = new();
 
     [Space(10)]
